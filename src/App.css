@@ -1,0 +1,39 @@
+form {
+  display: flex;
+  flex-direction: column;
+  
+  
+}
+.bookform {
+  display: flex;
+  flex-direction: column; 
+ 
+}
+
+.bookform button {
+  margin: 0.5em;
+  height: 40px;
+}
+
+.selector-button {
+  width: 105px;
+}
+.submit-button {
+  
+}
+.text-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.booklog {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.booklists {
+  display: flex;
+  flex-direction: column;
+  
+}
