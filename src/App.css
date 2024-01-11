@@ -18,13 +18,7 @@ form {
 .selector-button {
   width: 105px;
 }
-.submit-button {
-  
-}
-.text-area {
-  display: flex;
-  flex-direction: column;
-}
+
 
 .booklog {
   display: flex;
