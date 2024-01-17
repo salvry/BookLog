@@ -10,13 +10,25 @@ form {
  
 }
 
-.bookform button {
+.printbook-form {
+  display: flex;
+  flex-direction: column; 
+}
+
+.audiobook-form {
+  display: flex;
+  flex-direction: column; 
+}
+
+.submit-button {
   margin: 0.5em;
   height: 40px;
 }
 
 .selector-button {
   width: 105px;
+  height: 40px;
+  margin: 0.5em;
 }
 
 
@@ -29,5 +41,20 @@ form {
 .booklists {
   display: flex;
   flex-direction: column;
-  
+}
+
+.booklist-row .book-details {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: white;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.booklist-row:hover .book-details {
+  visibility: visible;
 }
