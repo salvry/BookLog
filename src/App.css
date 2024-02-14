@@ -1,23 +1,24 @@
 form {
   display: flex;
   flex-direction: column;
-  
-  
+
+
 }
+
 .bookform {
   display: flex;
-  flex-direction: column; 
- 
+  flex-direction: column;
+
 }
 
 .printbook-form {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 .audiobook-form {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 .submit-button {
@@ -26,8 +27,8 @@ form {
 }
 
 .selector-button {
-  width: 105px;
-  height: 40px;
+  width: 130px;
+  height: 50px;
   margin: 0.5em;
 }
 
@@ -46,11 +47,12 @@ form {
 .booklist-row .book-details {
   visibility: hidden;
   width: 120px;
+  height: 50px;
   background-color: black;
   color: white;
   padding: 5px 0;
 
-  
+
   position: absolute;
   z-index: 1;
 }
