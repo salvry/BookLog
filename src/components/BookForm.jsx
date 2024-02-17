@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-
+import Button from 'react-bootstrap/Button';
 
 const BookForm = (props) => {
 
@@ -62,30 +62,40 @@ const BookForm = (props) => {
         return null
     }
     return (
-        <div className="form">
-            <form onSubmit={addBook}>
-                <label htmlFor="author">Author</label>
-                <input onChange={handleAuthorChange} type="text" id="author" value={author} />
-                <label htmlFor="title">Title</label>
-                <input onChange={handleTitleChange} type="text" id="title" value={title} />
-                {props.format === "audio" &&
-                    <div className="audiobook-form">
-                        <label htmlFor="reader">Reader</label>
-                        <input type="text" id="reader" onChange={handleReaderChange} value={reader} />
-                        <label>Duration</label>
-                        <input type="number" id="hours" onChange={handleHoursChange} value={hours} placeholder='Hours' />
-                        <input type="number" id="minutes" onChange={handleMinutesChange} value={minutes} placeholder='Minutes' />
-                        <button className="submit-button" type="submit">Add book</button>
-                    </div>
-                }
-                {props.format === "print" &&
-                    <div className="printbook-form">
-                        <label htmlFor="pages">Number of pages</label>
-                        <input type="number" id="pages" onChange={handlePagesChange} value={pages} />
-                        <button className="submit-button" type="submit">Add book</button>
-                    </div>
-                }
-            </form>
+        <div className="container">
+            <div className="form">
+                <form onSubmit={addBook}>
+                    <label htmlFor="author">Author</label>
+                    <input onChange={handleAuthorChange} type="text" id="author" value={author} />
+                    <label htmlFor="title">Title</label>
+                    <input onChange={handleTitleChange} type="text" id="title" value={title} />
+                    {props.format === "audio" &&
+                        <div className="audiobook-form">
+                            <label htmlFor="reader">Reader</label>
+                            <input type="text" id="reader" onChange={handleReaderChange} value={reader} />
+                            <label>Duration</label>
+                            <input type="number" id="hours" onChange={handleHoursChange} value={hours} placeholder='Hours' />
+                            <input type="number" id="minutes" onChange={handleMinutesChange} value={minutes} placeholder='Minutes' />
+                            <div>
+                                <Button className="submit-button" type="submit">
+                                    Submit
+                                </Button>
+                            </div>
+                        </div>
+                    }
+                    {props.format === "print" &&
+                        <div className="printbook-form">
+                            <label htmlFor="pages">Number of pages</label>
+                            <input type="number" id="pages" onChange={handlePagesChange} value={pages} />
+                            <div>
+                                <Button className="submit-button" type="submit">
+                                    Submit
+                                </Button>
+                            </div>
+                        </div>
+                    }
+                </form>
+            </div>
         </div>
     );
 }
@@ -107,4 +117,4 @@ BookForm.propTypes = {
     hours: PropTypes.string,
     minutes: PropTypes.string
 }
-export default BookForm
+export default BookForm;

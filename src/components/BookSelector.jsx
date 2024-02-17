@@ -1,24 +1,34 @@
 import HeadsetIcon from '@mui/icons-material/Headset';
 import StyleIcon from '@mui/icons-material/Style';
-
+import { useState } from 'react';
 import PropTypes from 'prop-types';
+import BookForm from '../components/BookForm'
+import Button from 'react-bootstrap/Button';
 
-const BookSelector = ({ selectBook, selectAudioBook }) => {
-
+const BookSelector = ({ createBook }) => {
+    const [format, setFormat] = useState(null)
     return (
         <div>
-            <button className="selector-button" onClick={selectBook}>
+            <Button className="selector-button" onClick={() => setFormat("print")} >
                 <span><StyleIcon /></span>
-                Add book</button>
-            <button className="selector-button" onClick={selectAudioBook}>
+                Add book
+            </Button>
+            <Button className="selector-button" onClick={() => setFormat("audio")} >
                 <span><HeadsetIcon /></span>
-                Add audiobook</button>
-        </div >
-    );
+                Add audiobook
+            </Button>
+
+            <BookForm format={format} createBook={createBook} />
+        </div>
+
+
+
+
+
+    )
 }
 
 BookSelector.propTypes = {
-    selectBook: PropTypes.func,
-    selectAudioBook: PropTypes.func
+    createBook: PropTypes.func,
 }
-export default BookSelector
+export default BookSelector;

@@ -1,57 +1,68 @@
 import './App.css';
 import { useState } from 'react';
+import StartPage from './components/StartPage'
 import BookSelector from './components/BookSelector'
-import BookForm from './components/BookForm'
-import BookListRow from './components/BookListRow'
+import BookList from './components/BookList'
+import Book from './components/Book'
+import Home from './components/Home'
+import { Routes, Route, useMatch, Link, useNavigate } from 'react-router-dom'
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 
 const App = () => {
+  const initialBook = { title: "title", author: "author", format: "print" }
+  const initialBook2 = { title: "title2", author: "author", format: "print", length: 195 }
+  const initialBook3 = { title: "title3", author: "author", format: "audio", length: 210, reader: "reader" }
+  const initialBook4 = { title: "title4", author: "author", format: "audio", reader: "reader" }
+  const [books, setBooks] = useState([initialBook, initialBook2, initialBook3, initialBook4]);
 
-  const [format, setFormat] = useState(null)
-  const [books, setBooks] = useState([]);
-  const [audioBooks, setAudiobooks] = useState([]);
-
-
-  const selectBook = () => {
-    setFormat('print');
-  }
-
-  const selectAudioBook = () => {
-    setFormat('audio');
-  }
+  const navigate = useNavigate()
 
   const addBook = (book) => {
-    if (book.format === "print") {
-      setBooks(books.concat(book))
-    }
-    if (book.format === "audio") {
-      setAudiobooks(audioBooks.concat(book))
-    }
+
+    setBooks(books.concat(book))
+    navigate('/books')
   }
-  const pagesRead = books.reduce((acc, curr) => acc + curr.length, 0)
-  const hoursListened = Math.floor(audioBooks.reduce((acc, curr) => acc + curr.length, 0) / 60)
-  const minutesListened = audioBooks.reduce((acc, curr) => acc + curr.length, 0) % 60
+
+  const match = useMatch('/books/:title')
+  const book = match
+    ? books.find(book => book.title === match.params.title)
+    : null
 
   return (
     <div>
-      <h1>BookLog</h1>
-      <div className="booklog">
-        <div className="bookform">
-          <BookSelector selectBook={selectBook} selectAudioBook={selectAudioBook} />
-          <BookForm format={format} createBook={addBook} />
-        </div>
-        <div className="booklists">
-          {books.length > 0 && <><h2>Books</h2><ul>{books.map(book => <BookListRow key={book.title} book={book}
-            showBook={() => console.log(book)} />)}</ul>
-            <p>You have read {pagesRead} pages</p>
-          </>}
-          {audioBooks.length > 0 && <><h2>Audiobooks</h2>
-            <ul>{audioBooks.map(book => <BookListRow key={book.title} book={book} showBook={() => console.log(book)} length={book.length} />)}</ul>
-            <p>You have listened to audiobooks for {hoursListened} hours and {minutesListened} minutes</p>
-          </>
-          }
-        </div>
+      <div>
+        <Navbar collapseOnSelect expand="sm">
+          <Navbar.Brand href="/">
+            BookLog
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link href="#" as="span">
+                <Link to="/Home">Home</Link>
+              </Nav.Link>
+              <Nav.Link href="#" as="span">
+                <Link to="/books">Books</Link>
+              </Nav.Link>
+              <Nav.Link href="#" as="span">
+                <Link to="/new_book">New book</Link>
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
       </div>
+      <div>
+        <Routes>
+          <Route path="/" element={<StartPage />} />
+          <Route path="/books" element={<BookList books={books} />} />
+          <Route path="/home" element={<Home books={books} />} />
+          <Route path="/books/:title" element={<Book book={book} />} />
+          <Route path="/new_book" element={<BookSelector createBook={addBook} />} />
+        </Routes>
+      </div >
     </div>
+
 
   );
 }

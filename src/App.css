@@ -22,15 +22,28 @@ form {
 }
 
 .submit-button {
-  margin: 0.5em;
-  height: 40px;
+  margin-top: 0.5em;
+  background-color: #00995e;
+  border: 1px solid;
+
+}
+
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited {
+  background-color: #00e68e !important;
+  border: 1px solid #00995e !important;
 }
 
 .selector-button {
-  width: 130px;
-  height: 50px;
   margin: 0.5em;
+  background-color: #00995e;
+  border: 1px solid;
 }
+
+
+
 
 
 .booklog {
@@ -44,19 +57,47 @@ form {
   flex-direction: column;
 }
 
-.booklist-row .book-details {
-  visibility: hidden;
-  width: 120px;
-  height: 50px;
-  background-color: black;
-  color: white;
-  padding: 5px 0;
-
-
-  position: absolute;
-  z-index: 1;
+.card-img {
+  width: 40%;
+  height: 60%;
 }
 
-.booklist-row:hover .book-details {
-  visibility: visible;
+.card-group {
+  width: 80%;
+  margin-top: 0.5em;
+}
+
+.start-book-icon {
+  height: 450px;
+}
+
+.nav-link a {
+  text-decoration: none;
+}
+
+.navbar {
+  background-color: #00cc7e;
+}
+
+.navbar-brand {
+  color: #ccffeb;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.navbar-brand:hover,
+.navbar-brand:active {
+  background-color: #ccffeb !important;
+  color: #00cc7e !important;
+}
+
+.nav-link a {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.nav-link a:hover,
+.nav-link a:active {
+  background-color: #ccffeb !important;
+  color: #00cc7e !important;
 }
