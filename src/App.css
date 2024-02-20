@@ -58,12 +58,23 @@ form {
 }
 
 .card-img {
-  width: 40%;
-  height: 60%;
+  padding: 5px;
+  width: 50%;
+
+}
+
+.card-title {
+  font-size: 2rem;
+}
+
+.card-img-container {
+  justify-content: center;
+  height: 40%;
+  display: flex;
 }
 
 .card-group {
-  width: 80%;
+  width: 50%;
   margin-top: 0.5em;
 }
 

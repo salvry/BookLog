@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import StartPage from './components/StartPage'
 import BookSelector from './components/BookSelector'
 import BookList from './components/BookList'
@@ -8,25 +8,34 @@ import Home from './components/Home'
 import { Routes, Route, useMatch, Link, useNavigate } from 'react-router-dom'
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import booksService from './services/booksService'
+
 
 const App = () => {
-  const initialBook = { title: "title", author: "author", format: "print" }
-  const initialBook2 = { title: "title2", author: "author", format: "print", length: 195 }
-  const initialBook3 = { title: "title3", author: "author", format: "audio", length: 210, reader: "reader" }
-  const initialBook4 = { title: "title4", author: "author", format: "audio", reader: "reader" }
-  const [books, setBooks] = useState([initialBook, initialBook2, initialBook3, initialBook4]);
+
+  const [books, setBooks] = useState([])
+
+  useEffect(() => {
+    booksService.initialize()
+      .then(books => setBooks(books))
+
+  }, [])
+
 
   const navigate = useNavigate()
 
   const addBook = (book) => {
-
-    setBooks(books.concat(book))
+    console.log(book)
+    booksService.create(book)
+      .then(newBook => setBooks(books.concat(newBook)))
+    console.log(books)
     navigate('/books')
   }
 
-  const match = useMatch('/books/:title')
+  const match = useMatch('/books/:id')
+
   const book = match
-    ? books.find(book => book.title === match.params.title)
+    ? books.find(book => book.id === match.params.id)
     : null
 
   return (
@@ -57,7 +66,7 @@ const App = () => {
           <Route path="/" element={<StartPage />} />
           <Route path="/books" element={<BookList books={books} />} />
           <Route path="/home" element={<Home books={books} />} />
-          <Route path="/books/:title" element={<Book book={book} />} />
+          <Route path="/books/:id" element={<Book book={book} />} />
           <Route path="/new_book" element={<BookSelector createBook={addBook} />} />
         </Routes>
       </div >
@@ -66,5 +75,6 @@ const App = () => {
 
   );
 }
+
 
 export default App;

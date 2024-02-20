@@ -4,12 +4,14 @@ import CardGroup from 'react-bootstrap/CardGroup'
 import bookIcon from "../images/book.png"
 
 const Book = ({ book }) => {
-
+    console.log(book)
     return (
         <div className="container">
             <CardGroup>
                 <Card>
-                    <Card.Img className="card-img" variant="top" src={bookIcon} />
+                    <div className="card-img-container">
+                        <Card.Img className="card-img" variant="top" src={bookIcon} />
+                    </div>
                     <Card.Header>{book.author}</Card.Header>
                     <Card.Body>
                         <Card.Title>{book.title}</Card.Title>

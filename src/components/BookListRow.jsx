@@ -5,8 +5,8 @@ const BookListRow = ({ book }) => {
 
     return (
         <div className="booklist-row">
-            <li>
-                <Link to={`/books/${book.title}`}>{book.author}: {book.title} {book.format}</Link>
+            <li onClick={() => console.log(book)}>
+                <Link to={`/books/${book.id}`}>{book.author}: {book.title} {book.format}</Link>
             </li>
         </div>
     )
