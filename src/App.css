@@ -1,8 +1,27 @@
-form {
+body {
+  overflow: hidden;
+}
+
+.container {
+  margin-top: 10px;
+}
+
+.selector-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
 
+}
 
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
 }
 
 .bookform {
@@ -25,9 +44,7 @@ form {
   margin-top: 0.5em;
   background-color: #00995e;
   border: 1px solid;
-
 }
-
 
 .btn-primary:hover,
 .btn-primary:active,
@@ -42,9 +59,10 @@ form {
   border: 1px solid;
 }
 
-
-
-
+.button-selected {
+  background-color: #00e68e;
+  border: 1px solid #00995e;
+}
 
 .booklog {
   display: flex;
@@ -69,7 +87,6 @@ form {
 
 .card-img-container {
   justify-content: center;
-  height: 40%;
   display: flex;
 }
 
@@ -111,4 +128,76 @@ form {
 .nav-link a:active {
   background-color: #ccffeb !important;
   color: #00cc7e !important;
+}
+
+.booklist-container {
+  overflow-y: auto;
+  max-height: 350px;
+  min-width: 00px;
+  max-width: 550px;
+}
+
+.booklist h3 {
+  align-self: flex-start;
+}
+
+.booklist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.booklist-link {
+  background-color: #e6fff5;
+  border: none;
+  font-weight: bold;
+  padding: 0;
+  text-align: left;
+}
+
+.list-group-item {
+  background-color: #e6fff5;
+  border: 1px solid #00cc7e;
+  display: flex;
+  flex-direction: row;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+.list-group-item a {
+  text-decoration: none;
+  color: black;
+}
+
+
+.form-check-input:checked {
+  background-color: #00cc7e;
+  border-color: #00cc7e;
+}
+
+a {
+  text-decoration: none;
+}
+
+.card {
+  border-width: 1px;
+  border-color: #00cc7e;
+  margin: 1em;
+  border-radius: 1%;
+}
+
+.card a {
+  color: #00995c;
+  font-weight: bold;
+}
+
+.card-header {
+  background-color: #00cc7e;
+  color: #ffffff;
+  font-size: 1.2em;
+}
+
+.card-body {
+  background-color: #e6fff5;
+  border-color: #00cc7e;
 }

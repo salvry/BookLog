@@ -10,6 +10,7 @@ const BookForm = (props) => {
     const [hours, setHours] = useState('');
     const [minutes, setMinutes] = useState('');
     const [reader, setReader] = useState('');
+    const [date, setDate] = useState('')
 
     const handleAuthorChange = (event) => {
         setauthor(event.target.value);
@@ -35,21 +36,31 @@ const BookForm = (props) => {
         setReader(event.target.value);
     }
 
+    const handleDateChange = (event) => {
+        setDate(event.target.value);
+    }
+
     const addBook = (event) => {
         event.preventDefault();
         if (!title || !author) {
             alert("Title and author are mandatory")
             return
         }
+        const bookDate = date ? date : new Date()
         if (props.format === "print") {
-            props.createBook({ author: author, title: title, length: Number(pages), format: "print" });
+            props.createBook({
+                author: author, title: title, length: Number(pages), format: "print", date: bookDate
+            });
             setauthor('');
             setTitle('');
             setPages('');
 
         }
         else if (props.format === "audio") {
-            props.createBook({ author: author, title: title, length: Number(hours) * 60 + Number(minutes), reader: reader, format: "audio" });
+            props.createBook({
+                author: author, title: title, length: Number(hours) * 60 + Number(minutes),
+                reader: reader, format: "audio", date: bookDate
+            });
             setauthor('');
             setTitle('');
             setHours('');
@@ -62,41 +73,54 @@ const BookForm = (props) => {
         return null
     }
     return (
-        <div className="container">
-            <div className="form">
+        <div className="form-container">
+            <div className="form" style={{ width: "325px" }}>
                 <form onSubmit={addBook}>
-                    <label htmlFor="author">Author</label>
-                    <input onChange={handleAuthorChange} type="text" id="author" value={author} />
-                    <label htmlFor="title">Title</label>
-                    <input onChange={handleTitleChange} type="text" id="title" value={title} />
-                    {props.format === "audio" &&
-                        <div className="audiobook-form">
+                    <div className="form-group">
+                        <label htmlFor="author">Author*</label>
+                        <input className="w-75" onChange={handleAuthorChange} type="text" id="author" value={author} />
+                        <label htmlFor="title">Title*</label>
+                        <input className="w-75" onChange={handleTitleChange} type="text" id="title" value={title} />
+                    </div>
+                    {
+                        props.format === "audio" &&
+                        <div className="form-group" >
                             <label htmlFor="reader">Reader</label>
-                            <input type="text" id="reader" onChange={handleReaderChange} value={reader} />
-                            <label>Duration</label>
-                            <input type="number" id="hours" onChange={handleHoursChange} value={hours} placeholder='Hours' />
-                            <input type="number" id="minutes" onChange={handleMinutesChange} value={minutes} placeholder='Minutes' />
+                            <input className="w-75" type="text" id="reader" onChange={handleReaderChange} value={reader} />
                             <div>
-                                <Button className="submit-button" type="submit">
-                                    Submit
-                                </Button>
+                                <label>Duration</label>
+                                <div style={{ marginBottom: "0.5em" }}>
+                                    <input className="w-25" type="number" id="hours" onChange={handleHoursChange} value={hours} placeholder='Hours' />
+                                </div>
+                                <div>
+                                    <input className="w-25" type="number" id="minutes" onChange={handleMinutesChange} value={minutes} placeholder='Minutes' />
+                                </div>
                             </div>
+
                         </div>
                     }
-                    {props.format === "print" &&
-                        <div className="printbook-form">
+                    {
+                        props.format === "print" &&
+                        <div className="form-group" style={{ marginTop: "1em" }}>
                             <label htmlFor="pages">Number of pages</label>
-                            <input type="number" id="pages" onChange={handlePagesChange} value={pages} />
+                            <input className="w-25" type="number" id="pages" onChange={handlePagesChange} value={pages} />
                             <div>
-                                <Button className="submit-button" type="submit">
-                                    Submit
-                                </Button>
+
                             </div>
                         </div>
                     }
-                </form>
-            </div>
-        </div>
+                    <div className="form-group w-50">
+                        <label htmlFor="date">Date</label>
+                        <input id="date" type="date" onChange={handleDateChange} value={date} />
+                    </div>
+                    <div>
+                        <Button className="submit-button" type="submit">
+                            Submit
+                        </Button>
+                    </div>
+                </form >
+            </div >
+        </div >
     );
 }
 BookForm.propTypes = {

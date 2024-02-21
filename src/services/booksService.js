@@ -6,7 +6,6 @@ const initializeBooks = async () => {
     const response = await axios.get(`${baseUrl}/initialBooks`)
     const allBooks = response.data
     const addedBooks = await axios.get(`${baseUrl}/books`)
-    console.log(addedBooks.data)
     const randomIndexes = Array.from((new Set(Array.from({ length: 5 }, () => Math.floor(Math.random() * allBooks.length)))))
     const books = randomIndexes.map(i => allBooks[i]).concat(addedBooks.data)
 

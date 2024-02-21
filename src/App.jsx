@@ -64,10 +64,12 @@ const App = () => {
       <div>
         <Routes>
           <Route path="/" element={<StartPage />} />
-          <Route path="/books" element={<BookList books={books} />} />
+          <Route path="/books" element={<BookList books={books} filter="all" />} />
           <Route path="/home" element={<Home books={books} />} />
           <Route path="/books/:id" element={<Book book={book} />} />
           <Route path="/new_book" element={<BookSelector createBook={addBook} />} />
+          <Route path="/books/books" element={<BookList books={books.filter(book => book.format === "print")} />} />
+          <Route path="/books/audio" element={<BookList books={books.filter(book => book.format === "audio")} />} />
         </Routes>
       </div >
     </div>

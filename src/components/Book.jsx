@@ -1,30 +1,50 @@
 import { durationInHours, durationInMinutes } from '../utils'
 import Card from 'react-bootstrap/Card'
 import CardGroup from 'react-bootstrap/CardGroup'
-import bookIcon from "../images/book.png"
+import BookIcon from '@mui/icons-material/Book';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 const Book = ({ book }) => {
-    console.log(book)
+
+    const getDateString = () => {
+        if (book.date) {
+            const date = new Date(book.date)
+            return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
+        }
+        return ""
+    }
+
     return (
         <div className="container">
             <CardGroup>
                 <Card>
                     <div className="card-img-container">
-                        <Card.Img className="card-img" variant="top" src={bookIcon} />
+                        <BookIcon style={{ fontSize: "120px" }} />
                     </div>
                     <Card.Header>{book.author}</Card.Header>
                     <Card.Body>
                         <Card.Title>{book.title}</Card.Title>
-                        <Card.Text>
-                            {book.format === "print" && book.length && `Pages: ${book.length}`}
-                            {book.format === "audio" && book.length && `${durationInHours(book.length)} hours and ${durationInMinutes(book.length)} minutes`}
-                        </Card.Text>
-                        <Card.Text>
-                            {book.format === "audio" && book.reader && `Read by ${book.reader}`}
-                        </Card.Text>
-                        <Card.Text>
-                            <a href="https://www.flaticon.com/free-icons/book" title="book icons">Book icons created by popo2021 - Flaticon</a>
-                        </Card.Text>
+                        {book.format === "print" && book.length > 0 &&
+                            <div>
+                                <AutoStoriesIcon />
+                                {` ${book.length}`}
+                            </div>
+                        }
+                        {book.format === "audio" && book.length > 0 &&
+                            <div>
+                                <AccessTimeIcon />
+                                {durationInHours(book.length)} hours and {durationInMinutes(book.length)} minutes
+                            </div>
+                        }
+                        {book.format === "audio" && book.reader && `Read by ${book.reader}`}
+                        {book.date &&
+                            <div>
+                                <CalendarMonthIcon />
+                                {getDateString()}
+                            </div>
+                        }
                     </Card.Body>
                 </Card >
             </CardGroup>
