@@ -18,7 +18,6 @@ const App = () => {
   useEffect(() => {
     booksService.initialize()
       .then(books => setBooks(books))
-
   }, [])
 
 
@@ -37,6 +36,7 @@ const App = () => {
   const book = match
     ? books.find(book => book.id === match.params.id)
     : null
+
 
   return (
     <div>
@@ -64,7 +64,7 @@ const App = () => {
       <div>
         <Routes>
           <Route path="/" element={<StartPage />} />
-          <Route path="/books" element={<BookList books={books} filter="all" />} />
+          <Route path="/books" element={<BookList books={books} />} />
           <Route path="/home" element={<Home books={books} />} />
           <Route path="/books/:id" element={<Book book={book} />} />
           <Route path="/new_book" element={<BookSelector createBook={addBook} />} />

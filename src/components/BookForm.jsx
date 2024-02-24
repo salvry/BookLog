@@ -12,6 +12,8 @@ const BookForm = (props) => {
     const [reader, setReader] = useState('');
     const [date, setDate] = useState('')
 
+
+
     const handleAuthorChange = (event) => {
         setauthor(event.target.value);
     }
@@ -46,7 +48,7 @@ const BookForm = (props) => {
             alert("Title and author are mandatory")
             return
         }
-        const bookDate = date ? date : new Date()
+        const bookDate = date ? new Date(date) : Date()
         if (props.format === "print") {
             props.createBook({
                 author: author, title: title, length: Number(pages), format: "print", date: bookDate

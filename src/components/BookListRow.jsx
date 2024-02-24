@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom'
 import ListGroup from 'react-bootstrap/ListGroup';
-import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import Button from 'react-bootstrap/Button';
 
 
 const BookListRow = ({ book }) => {
@@ -11,7 +11,11 @@ const BookListRow = ({ book }) => {
         <ListGroup.Item as="li">
             <div className="ms-2 me-auto booklist-title">
                 <div>
-                    <button className="booklist-link" onClick={() => navigate(`/books/${book.id}`)}>
+                    <button className="booklist-link" onClick={() => {
+                        history.pushState({ prevPage: `books/${book.id}` }, "")
+
+                        navigate(`/books/${book.id}`)
+                    }}>
                         {book.title}
                         <Link to={`/books/${book.id}`}></Link>
                     </button>
@@ -22,8 +26,8 @@ const BookListRow = ({ book }) => {
                     </p>
                 </div>
             </div>
-            <ArrowOutwardIcon onClick={() => navigate(`/books/${book.id}`)} />
-        </ListGroup.Item>
+            <Button className="booklist-linkbutton" onClick={() => navigate(`/books/${book.id}`)}>See book</Button>
+        </ListGroup.Item >
     )
 }
 BookListRow.propTypes = {

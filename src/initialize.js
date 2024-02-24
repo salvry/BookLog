@@ -23,7 +23,7 @@ export function createBookObjects(path) {
             const author = line[3].split(",")
             const book = {
                 title: title, author: String(author[1] + " " + author[0]).trim(),
-                format: "print", length: Math.floor(Math.random() * (601 - 100) + 100)
+                format: "print", length: Math.floor(Math.random() * (601 - 100) + 100), date: new Date()
             }
             initBooks.push(book)
 
@@ -32,5 +32,5 @@ export function createBookObjects(path) {
 }
 
 const createBooks = createBookObjects('./bookdata/Helmet.csv')
-const books = { "books": createBooks }
+const books = { "initialBooks": createBooks }
 fs.writeFileSync('./db.json', JSON.stringify(books))
